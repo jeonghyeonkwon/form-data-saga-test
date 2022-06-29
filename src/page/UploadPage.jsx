@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import UploadComponent from "../components/UploadComponent";
-import { changeField } from "../modules/upload";
+import { changeField, changeFiles } from "../modules/upload";
 const UploadPageForm = styled.div`
   width: 100%;
   height: 100vh;
@@ -15,10 +15,11 @@ const UploadPageForm = styled.div`
 `;
 const UploadForm = styled.div`
   width: 60%;
-  height: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 400px;
+  padding: 10px;
+  overflow: scroll;
+  /* display: grid; */
+
   background-color: grey;
 `;
 const UploadTitleForm = styled.div`
@@ -55,6 +56,10 @@ const UploadBtn = styled.button`
 `;
 function UploadPage(props) {
   const dispatch = useDispatch();
+  const { title, files } = useSelector(({ upload }) => ({
+    title: upload.boardForm.title,
+    files: upload.boardForm.files,
+  }));
   const onDrop = (file) => {
     console.log(file);
     file.forEach((img) => {
@@ -62,11 +67,16 @@ function UploadPage(props) {
       dispatch(
         changeField({
           key: "files",
-          img,
+          value: img,
         })
       );
     });
   };
+
+  useEffect(() => {
+    console.log("effect");
+    console.log(files);
+  }, [files]);
   const onChangeField = (e) => {
     const { name, value } = e.target;
     console.log(e.target);
@@ -78,16 +88,34 @@ function UploadPage(props) {
     );
   };
   const onClickUpload = () => {};
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const onClickDelete = (e) => {
+    const { name } = e.target;
+    console.log(name);
+    console.log(files);
+    const changeFileArray = files.filter(
+      (img) => img.lastModified !== Number(name)
+    );
+
+    dispatch(changeFiles({ files: changeFileArray }));
+  };
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+  });
   return (
     <UploadPageForm>
       <UploadForm {...getRootProps()}>
         <input name="files" {...getInputProps()} />
-        <UploadComponent></UploadComponent>
+        {files.map((image) => (
+          <UploadComponent
+            key={image.lastModified}
+            image={image}
+            onClickDelete={onClickDelete}
+          />
+        ))}
       </UploadForm>
       <UploadTitleForm>
         <UploadTitleLabel>게시글 제목</UploadTitleLabel>
-        <UploadTitleField name="title" onChange={onChangeField} />
+        <UploadTitleField name="title" value={title} onChange={onChangeField} />
       </UploadTitleForm>
       <UploadBtnForm>
         <UploadBtn onClick={onClickUpload}>업로드 하기</UploadBtn>

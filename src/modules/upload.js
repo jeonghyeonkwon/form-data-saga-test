@@ -7,7 +7,7 @@ import * as uploadApi from "../lib/api/upload";
 
 const INITIALIZE = "upload/INITIALIZE";
 const CHANGE_FIELD = "upload/CHANGE_FIELD";
-
+const CHANGE_FILES = "upload/CHANGE_FILES";
 export const initialize = createAction(INITIALIZE);
 
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
@@ -15,6 +15,9 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   value,
 }));
 
+export const changeFiles = createAction(CHANGE_FILES, ({ files }) => ({
+  files,
+}));
 const initialState = {
   boardForm: {
     title: "",
@@ -32,6 +35,10 @@ export default handleActions(
         } else {
           draft.boardForm.files.push(value);
         }
+      }),
+    [CHANGE_FILES]: (state, { payload: { files } }) =>
+      produce(state, (draft) => {
+        draft.boardForm.files = files;
       }),
   },
   initialState
