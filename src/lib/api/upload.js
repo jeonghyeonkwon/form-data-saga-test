@@ -1,6 +1,3 @@
-import axios from "axios";
-const client = axios.create();
+import client from "./client";
 
-client.defaults.baseURL = "http://localhost:8000/api";
-
-export default client;
+export const fetchUpload = ({ form }) => client.post(`url`, form, {});

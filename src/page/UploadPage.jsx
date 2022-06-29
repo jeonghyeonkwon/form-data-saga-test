@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import UploadComponent from "../components/UploadComponent";
-import { changeField, changeFiles } from "../modules/upload";
+import { changeField, changeFiles, fetchBoard } from "../modules/upload";
 const UploadPageForm = styled.div`
   width: 100%;
   height: 100vh;
@@ -18,6 +18,7 @@ const UploadForm = styled.div`
   height: 400px;
   padding: 10px;
   overflow: scroll;
+  z-index: -1;
   /* display: grid; */
 
   background-color: grey;
@@ -87,7 +88,14 @@ function UploadPage(props) {
       })
     );
   };
-  const onClickUpload = () => {};
+  const onClickUpload = () => {
+    const frm = new FormData();
+    frm.append("title", title);
+    files.forEach((img, index) => {
+      frm.append(`file[${index}]`, img);
+    });
+    dispatch(fetchBoard({ form: frm }));
+  };
   const onClickDelete = (e) => {
     const { name } = e.target;
     console.log(name);
@@ -107,6 +115,7 @@ function UploadPage(props) {
         <input name="files" {...getInputProps()} />
         {files.map((image) => (
           <UploadComponent
+            {...getRootProps({ disabled: true })}
             key={image.lastModified}
             image={image}
             onClickDelete={onClickDelete}
