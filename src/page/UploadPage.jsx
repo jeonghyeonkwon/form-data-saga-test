@@ -7,7 +7,7 @@ import { changeField, changeFiles, fetchBoard } from "../modules/upload";
 const UploadPageForm = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #eee;
+  background-color: dodgerblue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +18,7 @@ const UploadForm = styled.div`
   height: 400px;
   padding: 10px;
   overflow: scroll;
-  z-index: -1;
+  /* z-index: -1; */
   /* display: grid; */
 
   background-color: grey;
@@ -61,76 +61,55 @@ function UploadPage(props) {
     title: upload.boardForm.title,
     files: upload.boardForm.files,
   }));
-  const onDrop = (file) => {
-    console.log(file);
-    file.forEach((img) => {
-      console.log(img);
-      dispatch(
-        changeField({
-          key: "files",
-          value: img,
-        })
-      );
-    });
-  };
+  // const onDrop = (file) => {
+  //   console.log(file);
+  //   file.forEach((img) => {
+  //     console.log(img);
+  //     dispatch(
+  //       changeField({
+  //         key: "files",
+  //         value: img,
+  //       })
+  //     );
+  //   });
+  // };
 
-  useEffect(() => {
-    console.log("effect");
-    console.log(files);
-  }, [files]);
-  const onChangeField = (e) => {
-    const { name, value } = e.target;
-    console.log(e.target);
-    dispatch(
-      changeField({
-        key: name,
-        value,
-      })
-    );
-  };
-  const onClickUpload = () => {
-    const frm = new FormData();
-    frm.append("title", title);
-    files.forEach((img, index) => {
-      frm.append(`file[${index}]`, img);
-    });
-    dispatch(fetchBoard({ form: frm }));
-  };
-  const onClickDelete = (e) => {
-    const { name } = e.target;
-    console.log(name);
-    console.log(files);
-    const changeFileArray = files.filter(
-      (img) => img.lastModified !== Number(name)
-    );
+  // useEffect(() => {
+  //   console.log("effect");
+  //   console.log(files);
+  // }, [files]);
+  // const onChangeField = (e) => {
+  //   const { name, value } = e.target;
+  //   console.log(e.target);
+  //   dispatch(
+  //     changeField({
+  //       key: name,
+  //       value,
+  //     })
+  //   );
+  // };
+  // const onClickUpload = () => {
+  //   const frm = new FormData();
+  //   frm.append("title", title);
+  //   files.forEach((img, index) => {
+  //     frm.append(`file[${index}]`, img);
+  //   });
+  //   dispatch(fetchBoard({ form: frm }));
+  // };
+  // const onClickDelete = (e) => {
+  //   const { name } = e.target;
+  //   console.log(name);
+  //   console.log(files);
+  //   const changeFileArray = files.filter(
+  //     (img) => img.lastModified !== Number(name)
+  //   );
 
-    dispatch(changeFiles({ files: changeFileArray }));
-  };
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-  });
-  return (
-    <UploadPageForm>
-      <UploadForm {...getRootProps()}>
-        <input name="files" {...getInputProps()} />
-        {files.map((image) => (
-          <UploadComponent
-            {...getRootProps({ disabled: true })}
-            key={image.lastModified}
-            image={image}
-            onClickDelete={onClickDelete}
-          />
-        ))}
-      </UploadForm>
-      <UploadTitleForm>
-        <UploadTitleLabel>게시글 제목</UploadTitleLabel>
-        <UploadTitleField name="title" value={title} onChange={onChangeField} />
-      </UploadTitleForm>
-      <UploadBtnForm>
-        <UploadBtn onClick={onClickUpload}>업로드 하기</UploadBtn>
-      </UploadBtnForm>
-    </UploadPageForm>
-  );
+  //   dispatch(changeFiles({ files: changeFileArray }));
+  // };
+  // const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  //   onDrop,
+  // });
+  return <UploadPageForm></UploadPageForm>;
 }
 
 export default UploadPage;
