@@ -7,54 +7,61 @@ import { changeField, changeFiles, fetchBoard } from "../modules/upload";
 const UploadPageForm = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: dodgerblue;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
-const UploadForm = styled.div`
-  width: 60%;
-  height: 400px;
-  padding: 10px;
-  overflow: scroll;
-  /* z-index: -1; */
-  /* display: grid; */
-
-  background-color: grey;
-`;
-const UploadTitleForm = styled.div`
-  width: 60%;
-  display: block;
-  /* text-align: center; */
-
-  padding: 40px 0px;
-`;
-const UploadTitleLabel = styled.label`
-  display: block;
-  text-align: left;
-  font-size: 25px;
-`;
-const UploadTitleField = styled.input`
+const RegisterForm = styled.div`
   width: 80%;
-  height: 30px;
+`;
+const InfoForm = styled.div`
+  width: 100%;
+  & h3 {
+    font-size: 24px;
+  }
+  & input[type="text"],
+  & textarea {
+    margin-left: 20px;
+    width: 50%;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    transition: 0.4s;
+    border: 2px solid black;
+    font-size: 20px;
+    &:hover {
+      border-color: dodgerblue;
+    }
+  }
+  & input[type="text"] {
+    padding-left: 10px;
+    height: 35px;
+  }
+  & textarea {
+    padding: 10px;
+    height: 200px;
+  }
+`;
 
-  border: 2px solid dodgerblue;
-  border-radius: 10px;
-`;
-const UploadBtnForm = styled.div`
-  padding: 10px 0px;
+const UploadForm = styled.div`
+  height: 400px;
   width: 60%;
-  display: block;
-  text-align: left;
+  border-radius: 10px;
+
+  border: 2px solid black;
+  background-color: #f1f1f1;
+  position: relative;
 `;
-const UploadBtn = styled.button`
-  font-size: 26px;
-  background-color: dodgerblue;
-  color: #fff;
-  border: 2px solid dodgerblue;
-  border-radius: 5px;
+const NoFileTitle = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 40px;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
 `;
+
 function UploadPage(props) {
   const dispatch = useDispatch();
   const { title, files } = useSelector(({ upload }) => ({
@@ -109,7 +116,23 @@ function UploadPage(props) {
   // const { getRootProps, getInputProps, isDragActive } = useDropzone({
   //   onDrop,
   // });
-  return <UploadPageForm></UploadPageForm>;
+  return (
+    <UploadPageForm>
+      <RegisterForm>
+        <InfoForm>
+          <h3>타이틀</h3>
+          <input type="text" />
+        </InfoForm>
+        <InfoForm>
+          <h3>내용</h3>
+          <textarea></textarea>
+        </InfoForm>
+        <UploadForm>
+          <NoFileTitle>파일 끌어다 올리기</NoFileTitle>
+        </UploadForm>
+      </RegisterForm>
+    </UploadPageForm>
+  );
 }
 
 export default UploadPage;
