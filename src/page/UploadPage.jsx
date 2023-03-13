@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import PreviewComponent from "../components/PreviewComponent";
 import UploadComponent from "../components/UploadComponent";
 import { changeField, changeFiles, fetchBoard } from "../modules/upload";
 const UploadPageForm = styled.div`
@@ -28,9 +29,11 @@ const InfoForm = styled.div`
     margin-bottom: 15px;
     border-radius: 10px;
     transition: 0.4s;
-    border: 2px solid black;
+    border: 1px solid black;
     font-size: 20px;
-    &:hover {
+    &:hover,
+    &:focus {
+      border: 1px solid;
       border-color: dodgerblue;
     }
   }
@@ -43,6 +46,12 @@ const InfoForm = styled.div`
     height: 200px;
   }
 `;
+const FileForm = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+`;
 
 const UploadForm = styled.div`
   height: 400px;
@@ -53,6 +62,7 @@ const UploadForm = styled.div`
   background-color: #f1f1f1;
   position: relative;
 `;
+
 const NoFileTitle = styled.span`
   position: absolute;
   top: 50%;
@@ -61,7 +71,17 @@ const NoFileTitle = styled.span`
   font-weight: bold;
   transform: translate(-50%, -50%);
 `;
-
+const PreviewForm = styled.div`
+  width: 35%;
+  height: 400px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  row-gap: 1px;
+`;
 function UploadPage(props) {
   const dispatch = useDispatch();
   const { title, files } = useSelector(({ upload }) => ({
@@ -127,9 +147,12 @@ function UploadPage(props) {
           <h3>내용</h3>
           <textarea></textarea>
         </InfoForm>
-        <UploadForm>
-          <NoFileTitle>파일 끌어다 올리기</NoFileTitle>
-        </UploadForm>
+        <FileForm>
+          <UploadForm>
+            <NoFileTitle>파일 끌어다 올리기</NoFileTitle>
+          </UploadForm>
+          <PreviewForm>{Array(5).fill(<PreviewComponent />)}</PreviewForm>
+        </FileForm>
       </RegisterForm>
     </UploadPageForm>
   );
