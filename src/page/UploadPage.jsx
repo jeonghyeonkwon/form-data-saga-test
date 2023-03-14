@@ -82,6 +82,22 @@ const PreviewForm = styled.div`
   grid-template-rows: repeat(3, 1fr);
   row-gap: 1px;
 `;
+const BtnForm = styled.div`
+  width: 80%;
+  padding: 20px;
+
+  input[type="button"] {
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    background-color: #0a5803;
+    transition: 0.4s;
+    &:hover {
+      background-color: green;
+    }
+  }
+`;
 function UploadPage(props) {
   const dispatch = useDispatch();
   const { title, files } = useSelector(({ upload }) => ({
@@ -151,9 +167,12 @@ function UploadPage(props) {
           <UploadForm>
             <NoFileTitle>파일 끌어다 올리기</NoFileTitle>
           </UploadForm>
-          <PreviewForm>{Array(5).fill(<PreviewComponent />)}</PreviewForm>
+          <PreviewForm>{Array(10).fill(<PreviewComponent />)}</PreviewForm>
         </FileForm>
       </RegisterForm>
+      <BtnForm>
+        <input type="button" value="등록하기" />
+      </BtnForm>
     </UploadPageForm>
   );
 }
