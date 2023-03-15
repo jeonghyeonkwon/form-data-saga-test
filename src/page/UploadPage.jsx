@@ -121,16 +121,15 @@ function UploadPage(props) {
   //   console.log("effect");
   //   console.log(files);
   // }, [files]);
-  // const onChangeField = (e) => {
-  //   const { name, value } = e.target;
-  //   console.log(e.target);
-  //   dispatch(
-  //     changeField({
-  //       key: name,
-  //       value,
-  //     })
-  //   );
-  // };
+  const onChangeField = (e) => {
+    const { name, value } = e.target;
+    dispatch(
+      changeField({
+        key: name,
+        value,
+      })
+    );
+  };
   // const onClickUpload = () => {
   //   const frm = new FormData();
   //   frm.append("title", title);
@@ -152,16 +151,17 @@ function UploadPage(props) {
   // const { getRootProps, getInputProps, isDragActive } = useDropzone({
   //   onDrop,
   // });
+
   return (
     <UploadPageForm>
       <RegisterForm>
         <InfoForm>
           <h3>타이틀</h3>
-          <input type="text" />
+          <input type="text" name="title" onChange={onChangeField} />
         </InfoForm>
         <InfoForm>
           <h3>내용</h3>
-          <textarea></textarea>
+          <textarea name="content" onChange={onChangeField}></textarea>
         </InfoForm>
         <FileForm>
           <UploadForm>

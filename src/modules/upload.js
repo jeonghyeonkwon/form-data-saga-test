@@ -28,6 +28,7 @@ export const changeFiles = createAction(CHANGE_FILES, ({ files }) => ({
 const initialState = {
   boardForm: {
     title: "",
+    content: "",
     files: [],
   },
 };
