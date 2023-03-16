@@ -30,11 +30,13 @@ const DeleteBtn = styled.span`
     background-color: #b30707;
   }
 `;
-const PreviewComponent = () => {
+const Title = styled.p``;
+const PreviewComponent = ({ data, onClickDelete }) => {
   return (
-    <PreviewForm>
+    <PreviewForm onClick={() => onClickDelete(data.uid)}>
       <PreviewImg src="http://via.placeholder.com/640x480 " />
       <DeleteBtn>삭제</DeleteBtn>
+      <Title>{data.title}</Title>
     </PreviewForm>
   );
 };

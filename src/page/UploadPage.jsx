@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -104,6 +104,18 @@ function UploadPage(props) {
     title: upload.boardForm.title,
     files: upload.boardForm.files,
   }));
+  const [preview, setPreview] = useState([
+    { uid: 1, title: "미리보기1" },
+    { uid: 2, title: "미리보기2" },
+    { uid: 3, title: "미리보기3" },
+    { uid: 4, title: "미리보기4" },
+    { uid: 5, title: "미리보기5" },
+    { uid: 6, title: "미리보기6" },
+    { uid: 7, title: "미리보기7" },
+    { uid: 8, title: "미리보기8" },
+    { uid: 9, title: "미리보기9" },
+    { uid: 10, title: "미리보기10" },
+  ]);
   // const onDrop = (file) => {
   //   console.log(file);
   //   file.forEach((img) => {
@@ -129,6 +141,10 @@ function UploadPage(props) {
         value,
       })
     );
+  };
+  const onClickDelete = (uid) => {
+    console.log(uid);
+    setPreview(preview.filter((data) => data.uid !== uid));
   };
   // const onClickUpload = () => {
   //   const frm = new FormData();
@@ -167,7 +183,15 @@ function UploadPage(props) {
           <UploadForm>
             <NoFileTitle>파일 끌어다 올리기</NoFileTitle>
           </UploadForm>
-          <PreviewForm>{Array(10).fill(<PreviewComponent />)}</PreviewForm>
+          <PreviewForm>
+            {preview.map((data, index) => (
+              <PreviewComponent
+                key={data.uid}
+                data={data}
+                onClickDelete={onClickDelete}
+              />
+            ))}
+          </PreviewForm>
         </FileForm>
       </RegisterForm>
       <BtnForm>
