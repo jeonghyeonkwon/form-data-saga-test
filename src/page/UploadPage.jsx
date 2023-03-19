@@ -76,11 +76,19 @@ const PreviewForm = styled.div`
   height: 400px;
   border: 1px solid black;
   border-radius: 10px;
+  padding: 6px;
+  overflow: hidden;
+`;
+const PreviewContent = styled.div`
+  /* background-color: dodgerblue; */
   padding: 20px;
+  height: 400px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  row-gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 40px;
+  border-radius: 8px;
+  overflow-y: scroll;
 `;
 const BtnForm = styled.div`
   width: 80%;
@@ -184,13 +192,15 @@ function UploadPage(props) {
             <NoFileTitle>파일 끌어다 올리기</NoFileTitle>
           </UploadForm>
           <PreviewForm>
-            {preview.map((data, index) => (
-              <PreviewComponent
-                key={data.uid}
-                data={data}
-                onClickDelete={onClickDelete}
-              />
-            ))}
+            <PreviewContent>
+              {preview.map((data, index) => (
+                <PreviewComponent
+                  key={data.uid}
+                  data={data}
+                  onClickDelete={onClickDelete}
+                />
+              ))}
+            </PreviewContent>
           </PreviewForm>
         </FileForm>
       </RegisterForm>

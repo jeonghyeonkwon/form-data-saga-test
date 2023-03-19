@@ -26,11 +26,15 @@ const DeleteBtn = styled.span`
   border-radius: 5px;
   transition: 0.4s;
   cursor: pointer;
+  z-index: 9999;
   &:hover {
     background-color: #b30707;
   }
 `;
-const Title = styled.p``;
+const Title = styled.p`
+  /* background-color: dodgerblue; */
+  height: 30px;
+`;
 const PreviewComponent = ({ data, onClickDelete }) => {
   return (
     <PreviewForm onClick={() => onClickDelete(data.uid)}>
