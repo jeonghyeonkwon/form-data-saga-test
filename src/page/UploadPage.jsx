@@ -53,7 +53,7 @@ const FileForm = styled.div`
   justify-content: space-between;
 `;
 
-const UploadForm = styled.div`
+const NoUploadForm = styled.div`
   height: 400px;
   width: 60%;
   border-radius: 10px;
@@ -61,6 +61,26 @@ const UploadForm = styled.div`
   border: 2px solid black;
   background-color: #f1f1f1;
   position: relative;
+`;
+const UploadForm = styled.div`
+  height: 400px;
+  width: 60%;
+  border-radius: 10px;
+
+  border: 2px solid black;
+  background-color: #f1f1f1;
+
+  overflow: hidden;
+  padding: 6px;
+`;
+const UploadContent = styled.div`
+  overflow-y: auto;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const NoFileTitle = styled.span`
@@ -189,7 +209,16 @@ function UploadPage(props) {
         </InfoForm>
         <FileForm>
           <UploadForm>
-            <NoFileTitle>파일 끌어다 올리기</NoFileTitle>
+            <UploadContent>
+              {preview.map((data, index) => (
+                <UploadComponent
+                  key={data.uid}
+                  data={data}
+                  onClickDelete={onClickDelete}
+                />
+              ))}
+            </UploadContent>
+            {/* <NoFileTitle>파일 끌어다 올리기</NoFileTitle> */}
           </UploadForm>
           <PreviewForm>
             <PreviewContent>
