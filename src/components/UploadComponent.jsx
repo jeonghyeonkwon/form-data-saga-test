@@ -23,12 +23,13 @@ const DeleteForm = styled.div`
   width: 120px;
   padding: 20px;
   color: white;
+  cursor: pointer;
 `;
 function UploadComponent({ data, onClickDelete }) {
   return (
     <UploadForm>
       <TitleForm>{data.title}</TitleForm>
-      <DeleteForm>삭제하기</DeleteForm>
+      <DeleteForm onClick={() => onClickDelete(data.uid)}>삭제하기</DeleteForm>
     </UploadForm>
   );
 }
