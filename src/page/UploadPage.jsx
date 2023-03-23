@@ -77,10 +77,10 @@ const UploadContent = styled.div`
   overflow-y: auto;
   padding: 20px;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 400px;
+  display: grid;
+  grid-template-columns: auto(1, 1fr);
+  place-items: center;
 `;
 
 const NoFileTitle = styled.span`
@@ -106,6 +106,7 @@ const PreviewContent = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 1fr);
+
   row-gap: 40px;
   border-radius: 8px;
   overflow-y: scroll;

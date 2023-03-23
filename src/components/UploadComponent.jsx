@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 const UploadForm = styled.div`
   width: 90%;
-  height: 300px;
+  height: 80px;
   background-color: dodgerblue;
 
   display: flex;
   overflow: hidden;
-
+  margin-bottom: 20px;
   border-radius: 10px;
 `;
 const TitleForm = styled.div`
