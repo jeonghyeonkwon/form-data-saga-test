@@ -209,18 +209,24 @@ function UploadPage(props) {
           <textarea name="content" onChange={onChangeField}></textarea>
         </InfoForm>
         <FileForm>
-          <UploadForm>
-            <UploadContent>
-              {preview.map((data, index) => (
-                <UploadComponent
-                  key={data.uid}
-                  data={data}
-                  onClickDelete={onClickDelete}
-                />
-              ))}
-            </UploadContent>
-            {/* <NoFileTitle>파일 끌어다 올리기</NoFileTitle> */}
-          </UploadForm>
+          {preview.length === 0 ? (
+            <NoUploadForm>
+              {" "}
+              <NoFileTitle>파일 끌어다 올리기</NoFileTitle>
+            </NoUploadForm>
+          ) : (
+            <UploadForm>
+              <UploadContent>
+                {preview.map((data, index) => (
+                  <UploadComponent
+                    key={data.uid}
+                    data={data}
+                    onClickDelete={onClickDelete}
+                  />
+                ))}
+              </UploadContent>
+            </UploadForm>
+          )}
           <PreviewForm>
             <PreviewContent>
               {preview.map((data, index) => (
