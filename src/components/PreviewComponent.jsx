@@ -38,7 +38,7 @@ const Title = styled.p`
 const PreviewComponent = ({ data, onClickDelete }) => {
   return (
     <PreviewForm onClick={() => onClickDelete(data.uid)}>
-      <PreviewImg src="http://via.placeholder.com/640x480 " />
+      <PreviewImg src={data.url} />
       <DeleteBtn>삭제</DeleteBtn>
       <Title>{data.title}</Title>
     </PreviewForm>

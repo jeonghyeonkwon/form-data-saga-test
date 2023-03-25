@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -13,15 +13,16 @@ const UploadPageForm = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  h3 {
+    font-size: 24px;
+  }
 `;
 const RegisterForm = styled.div`
   width: 80%;
 `;
 const InfoForm = styled.div`
   width: 100%;
-  & h3 {
-    font-size: 24px;
-  }
+
   & input[type="text"],
   & textarea {
     margin-left: 20px;
@@ -51,8 +52,27 @@ const FileForm = styled.div`
   display: flex;
   padding: 10px;
   justify-content: space-between;
+  input {
+    display: none;
+  }
 `;
 
+const FilePlusBtn = styled.span`
+  background-color: dodgerblue;
+  display: inline-block;
+  text-align: center;
+  line-height: 28px;
+  border-radius: 50%;
+  margin-left: 10px;
+  color: white;
+  width: 25px;
+  height: 25px;
+  transition: 0.4s;
+  cursor: pointer;
+  &:hover {
+    background-color: #0d4e90;
+  }
+`;
 const NoUploadForm = styled.div`
   height: 400px;
   width: 60%;
@@ -128,22 +148,23 @@ const BtnForm = styled.div`
   }
 `;
 function UploadPage(props) {
+  const fileRef = useRef();
   const dispatch = useDispatch();
   const { title, files } = useSelector(({ upload }) => ({
     title: upload.boardForm.title,
     files: upload.boardForm.files,
   }));
   const [preview, setPreview] = useState([
-    { uid: 1, title: "미리보기1" },
-    { uid: 2, title: "미리보기2" },
-    { uid: 3, title: "미리보기3" },
-    { uid: 4, title: "미리보기4" },
-    { uid: 5, title: "미리보기5" },
-    { uid: 6, title: "미리보기6" },
-    { uid: 7, title: "미리보기7" },
-    { uid: 8, title: "미리보기8" },
-    { uid: 9, title: "미리보기9" },
-    { uid: 10, title: "미리보기10" },
+    { uid: 1, title: "미리보기1", url: "http://via.placeholder.com/640x480" },
+    { uid: 2, title: "미리보기2", url: "http://via.placeholder.com/640x480" },
+    { uid: 3, title: "미리보기3", url: "http://via.placeholder.com/640x480" },
+    { uid: 4, title: "미리보기4", url: "http://via.placeholder.com/640x480" },
+    { uid: 5, title: "미리보기5", url: "http://via.placeholder.com/640x480" },
+    { uid: 6, title: "미리보기6", url: "http://via.placeholder.com/640x480" },
+    { uid: 7, title: "미리보기7", url: "http://via.placeholder.com/640x480" },
+    { uid: 8, title: "미리보기8", url: "http://via.placeholder.com/640x480" },
+    { uid: 9, title: "미리보기9", url: "http://via.placeholder.com/640x480" },
+    { uid: 10, title: "미리보기10", url: "http://via.placeholder.com/640x480" },
   ]);
   // const onDrop = (file) => {
   //   console.log(file);
@@ -174,6 +195,9 @@ function UploadPage(props) {
   const onClickDelete = (uid) => {
     console.log(uid);
     setPreview(preview.filter((data) => data.uid !== uid));
+  };
+  const onClickFile = (e) => {
+    fileRef.current.click();
   };
   // const onClickUpload = () => {
   //   const frm = new FormData();
@@ -208,7 +232,11 @@ function UploadPage(props) {
           <h3>내용</h3>
           <textarea name="content" onChange={onChangeField}></textarea>
         </InfoForm>
+        <h3>
+          파일 올리기<FilePlusBtn onClick={onClickFile}>+</FilePlusBtn>
+        </h3>
         <FileForm>
+          <input type="file" multiple ref={fileRef} />
           {preview.length === 0 ? (
             <NoUploadForm>
               {" "}
