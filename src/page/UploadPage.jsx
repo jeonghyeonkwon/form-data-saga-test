@@ -236,7 +236,7 @@ function UploadPage(props) {
           파일 올리기<FilePlusBtn onClick={onClickFile}>+</FilePlusBtn>
         </h3>
         <FileForm>
-          <input type="file" multiple ref={fileRef} />
+          <input type="file" multiple ref={fileRef} accept="image/*" />
           {preview.length === 0 ? (
             <NoUploadForm>
               {" "}
