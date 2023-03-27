@@ -199,6 +199,15 @@ function UploadPage(props) {
   const onClickFile = (e) => {
     fileRef.current.click();
   };
+  const onChangeFile = (e) => {
+    console.log(e.target.files);
+    console.log(e.target.files.fileList);
+
+    const imgFiles = Array.from(e.target.files);
+    imgFiles.forEach((element) => console.log(element));
+  };
+
+  const encodeFileToBase64 = (fileBlob) => {};
   // const onClickUpload = () => {
   //   const frm = new FormData();
   //   frm.append("title", title);
@@ -236,7 +245,13 @@ function UploadPage(props) {
           파일 올리기<FilePlusBtn onClick={onClickFile}>+</FilePlusBtn>
         </h3>
         <FileForm>
-          <input type="file" multiple ref={fileRef} accept="image/*" />
+          <input
+            type="file"
+            multiple
+            ref={fileRef}
+            accept="image/*"
+            onChange={onChangeFile}
+          />
           {preview.length === 0 ? (
             <NoUploadForm>
               {" "}
