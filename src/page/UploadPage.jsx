@@ -5,6 +5,7 @@ import styled from "styled-components";
 import PreviewComponent from "../components/PreviewComponent";
 import UploadComponent from "../components/UploadComponent";
 import { changeField, changeFiles, fetchBoard } from "../modules/upload";
+import { imageToBase64 } from "../util/ImgUtil";
 const UploadPageForm = styled.div`
   width: 100%;
   height: 100vh;
@@ -204,10 +205,13 @@ function UploadPage(props) {
     console.log(e.target.files.fileList);
 
     const imgFiles = Array.from(e.target.files);
-    imgFiles.forEach((element) => console.log(element));
+    imgFiles.forEach((file) => {
+      imageToBase64(file).then((result) => {
+        console.log(result);
+      });
+    });
   };
 
-  const encodeFileToBase64 = (fileBlob) => {};
   // const onClickUpload = () => {
   //   const frm = new FormData();
   //   frm.append("title", title);
