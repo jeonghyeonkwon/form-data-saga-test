@@ -155,18 +155,7 @@ function UploadPage(props) {
     title: upload.boardForm.title,
     files: upload.boardForm.files,
   }));
-  const [preview, setPreview] = useState([
-    { uid: 1, title: "미리보기1", url: "http://via.placeholder.com/640x480" },
-    { uid: 2, title: "미리보기2", url: "http://via.placeholder.com/640x480" },
-    { uid: 3, title: "미리보기3", url: "http://via.placeholder.com/640x480" },
-    { uid: 4, title: "미리보기4", url: "http://via.placeholder.com/640x480" },
-    { uid: 5, title: "미리보기5", url: "http://via.placeholder.com/640x480" },
-    { uid: 6, title: "미리보기6", url: "http://via.placeholder.com/640x480" },
-    { uid: 7, title: "미리보기7", url: "http://via.placeholder.com/640x480" },
-    { uid: 8, title: "미리보기8", url: "http://via.placeholder.com/640x480" },
-    { uid: 9, title: "미리보기9", url: "http://via.placeholder.com/640x480" },
-    { uid: 10, title: "미리보기10", url: "http://via.placeholder.com/640x480" },
-  ]);
+  const [preview, setPreview] = useState([]);
   // const onDrop = (file) => {
   //   console.log(file);
   //   file.forEach((img) => {
@@ -201,13 +190,15 @@ function UploadPage(props) {
     fileRef.current.click();
   };
   const onChangeFile = (e) => {
-    console.log(e.target.files);
-    console.log(e.target.files.fileList);
-
     const imgFiles = Array.from(e.target.files);
+
     imgFiles.forEach((file) => {
       imageToBase64(file).then((result) => {
-        console.log(result);
+        const data = {
+          title: file.name,
+          url: result,
+        };
+        setPreview((oldData) => [data, ...oldData]);
       });
     });
   };
