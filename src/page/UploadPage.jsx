@@ -182,9 +182,8 @@ function UploadPage(props) {
       })
     );
   };
-  const onClickDelete = (uid) => {
-    console.log(uid);
-    setPreview(preview.filter((data) => data.uid !== uid));
+  const onClickDelete = (title) => {
+    setPreview(preview.filter((data) => data.title !== title));
   };
   const onClickFile = (e) => {
     fileRef.current.click();

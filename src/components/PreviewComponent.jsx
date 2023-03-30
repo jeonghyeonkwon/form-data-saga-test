@@ -37,7 +37,7 @@ const Title = styled.p`
 `;
 const PreviewComponent = ({ data, onClickDelete }) => {
   return (
-    <PreviewForm onClick={() => onClickDelete(data.uid)}>
+    <PreviewForm onClick={() => onClickDelete(data.title)}>
       <PreviewImg src={data.url} />
       <DeleteBtn>삭제</DeleteBtn>
       <Title>{data.title}</Title>

@@ -49,7 +49,7 @@ function UploadComponent({ data, onClickDelete }) {
       <TitleForm>
         <h4>{data.title}</h4>
       </TitleForm>
-      <DeleteForm onClick={() => onClickDelete(data.uid)}>
+      <DeleteForm onClick={() => onClickDelete(data.title)}>
         <span>삭제하기</span>
       </DeleteForm>
     </UploadForm>
