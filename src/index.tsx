@@ -8,7 +8,9 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer, { rootSaga } from "./modules";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
