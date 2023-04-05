@@ -148,7 +148,7 @@ const BtnForm = styled.div`
     }
   }
 `;
-function UploadPage(props) {
+function UploadPage() {
   const fileRef = useRef();
   const dispatch = useDispatch();
   const { title, files } = useSelector(({ upload }) => ({

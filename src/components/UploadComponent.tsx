@@ -43,7 +43,13 @@ const DeleteForm = styled.div`
     background-color: #910521;
   }
 `;
-function UploadComponent({ data, onClickDelete }) {
+
+type DataProps = {
+  data: { title: string };
+  onClickDelete: (title: string) => void;
+};
+
+function UploadComponent({ data, onClickDelete }: DataProps) {
   return (
     <UploadForm>
       <TitleForm>
