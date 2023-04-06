@@ -35,7 +35,12 @@ const Title = styled.p`
   /* background-color: dodgerblue; */
   height: 30px;
 `;
-const PreviewComponent = ({ data, onClickDelete }) => {
+
+type DataProps = {
+  data: { title: string; url: string };
+  onClickDelete: (title: string) => void;
+};
+const PreviewComponent = ({ data, onClickDelete }: DataProps) => {
   return (
     <PreviewForm onClick={() => onClickDelete(data.title)}>
       <PreviewImg src={data.url} />
