@@ -148,14 +148,17 @@ const BtnForm = styled.div`
     }
   }
 `;
+
+type FileData = {
+  title: string;
+  url: string;
+};
+
 function UploadPage() {
-  const fileRef = useRef();
+  const fileRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
-  const { title, files } = useSelector(({ upload }) => ({
-    title: upload.boardForm.title,
-    files: upload.boardForm.files,
-  }));
-  const [preview, setPreview] = useState([]);
+
+  const [preview, setPreview] = useState<FileData[]>([]);
   // const onDrop = (file) => {
   //   console.log(file);
   //   file.forEach((img) => {
@@ -182,13 +185,13 @@ function UploadPage() {
       })
     );
   };
-  const onClickDelete = (title) => {
+  const onClickDelete = (title: string) => {
     setPreview(preview.filter((data) => data.title !== title));
   };
-  const onClickFile = (e) => {
-    fileRef.current.click();
+  const onClickFile = (e: React.MouseEvent<HTMLButtonElement>) => {
+    fileRef?.current?.click();
   };
-  const onChangeFile = (e) => {
+  const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const imgFiles = Array.from(e.target.files);
 
     imgFiles.forEach((file) => {
@@ -255,11 +258,7 @@ function UploadPage() {
             <UploadForm>
               <UploadContent>
                 {preview.map((data, index) => (
-                  <UploadComponent
-                    key={data.uid}
-                    data={data}
-                    onClickDelete={onClickDelete}
-                  />
+                  <UploadComponent data={data} onClickDelete={onClickDelete} />
                 ))}
               </UploadContent>
             </UploadForm>
@@ -267,11 +266,7 @@ function UploadPage() {
           <PreviewForm>
             <PreviewContent>
               {preview.map((data, index) => (
-                <PreviewComponent
-                  key={data.uid}
-                  data={data}
-                  onClickDelete={onClickDelete}
-                />
+                <PreviewComponent data={data} onClickDelete={onClickDelete} />
               ))}
             </PreviewContent>
           </PreviewForm>
