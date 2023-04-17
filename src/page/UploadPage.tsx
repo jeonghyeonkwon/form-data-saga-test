@@ -176,7 +176,7 @@ function UploadPage() {
   //   console.log("effect");
   //   console.log(files);
   // }, [files]);
-  const onChangeField = (e) => {
+  const onChangeField = (e: any) => {
     const { name, value } = e.target;
     dispatch(
       changeField({
@@ -191,12 +191,13 @@ function UploadPage() {
   const onClickFile = (e: React.MouseEvent<HTMLButtonElement>) => {
     fileRef?.current?.click();
   };
-  const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const imgFiles = Array.from(e.target.files);
+  const onChangeFile = (e: React.ChangeEvent) => {
+    const targetFiles = (e.target as HTMLInputElement).files as FileList;
+    const imgFiles = Array.from(targetFiles);
 
     imgFiles.forEach((file) => {
-      imageToBase64(file).then((result) => {
-        const data = {
+      imageToBase64(file).then((result: any) => {
+        const data: FileData = {
           title: file.name,
           url: result,
         };
