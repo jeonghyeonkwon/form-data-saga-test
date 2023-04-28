@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/redux-actions": "^2.6.2",
     "@types/styled-components": "^5.1.26"
   }
 }
