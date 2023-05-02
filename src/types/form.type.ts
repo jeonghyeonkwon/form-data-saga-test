@@ -3,3 +3,7 @@ export type Form = {
   content: string;
   file: string | Blob;
 };
+export type ChangeFieldType = {
+  key: string;
+  value?: string;
+};

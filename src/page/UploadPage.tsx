@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import PreviewComponent from "../components/PreviewComponent";
 import UploadComponent from "../components/UploadComponent";
-import { changeField, changeFiles, fetchBoard } from "../modules/upload";
+// import { changeField, changeFiles, fetchBoard } from "../modules/upload";
+import { changeField, changeFiles } from "../modules/upload";
 import { imageToBase64 } from "../util/ImgUtil";
 const UploadPageForm = styled.div`
   width: 100%;

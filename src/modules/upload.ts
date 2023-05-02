@@ -5,6 +5,7 @@ import createRequestSaga, {
 } from "../lib/createRequestSaga";
 import * as uploadApi from "../lib/api/upload";
 import { takeLatest } from "@redux-saga/core/effects";
+import { ChangeFieldType } from "../types/form.type";
 
 const INITIALIZE = "upload/INITIALIZE";
 const CHANGE_FIELD = "upload/CHANGE_FIELD";
@@ -12,17 +13,20 @@ const CHANGE_FILES = "upload/CHANGE_FILES";
 
 export const [FETCH_BOARD, FETCH_BOARD_SUCCESS, FETCH_BOARD_FAILURE] =
   createRequestActionTypes("upload/FETCH_BOARD");
-export const fetchBoard = createAction(FETCH_BOARD, ({ form }) => ({ form }));
-const fetchBoardSaga = createRequestSaga(FETCH_BOARD, uploadApi.fetchUpload);
+// export const fetchBoard = createAction(FETCH_BOARD, ({ form }) => ({ form }));
+// const fetchBoardSaga = createRequestSaga(FETCH_BOARD, uploadApi.fetchUpload);
 
 export const initialize = createAction(INITIALIZE);
 
-export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
-  key,
-  value,
-}));
+export const changeField = createAction(
+  CHANGE_FIELD,
+  ({ key, value }: ChangeFieldType) => ({
+    key,
+    value,
+  })
+);
 
-export const changeFiles = createAction(CHANGE_FILES, ({ files }) => ({
+export const changeFiles = createAction(CHANGE_FILES, ({ files }: any) => ({
   files,
 }));
 const initialState = {
